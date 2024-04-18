@@ -2,34 +2,6 @@
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_7l1ga"]
 
-[sub_resource type="Animation" id="Animation_psmj8"]
-resource_name = "weapon_swing"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AllMoving/Pivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-2.96706, 0, 0), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AllMoving/Pivot/Weapon/HurtBox/CollisionShape3D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
 [sub_resource type="Animation" id="Animation_q6j1r"]
 length = 0.001
 tracks/0/type = "value"
@@ -84,6 +56,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Quaternion(0, 0, 0, 1), Quaternion(-0.701015, 0, 0, 0.713146), Quaternion(0.999879, 0, 0, 0.015559), Quaternion(0.720981, 0, 0, 0.692955), Quaternion(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_psmj8"]
+resource_name = "weapon_swing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AllMoving/Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2.96706, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AllMoving/Pivot/Weapon/HurtBox/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2355c"]
@@ -141,7 +141,6 @@ shape = SubResource("BoxShape3D_y7vd7")
 wait_time = 0.2
 
 [node name="AllMoving" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 rotation_edit_mode = 1
 
 [node name="Body" type="MeshInstance3D" parent="AllMoving"]
