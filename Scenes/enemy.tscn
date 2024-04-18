@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2mgkn1jhb6aa"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_dax3d"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ea66o"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_madbl"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sdm75"]
+points = PackedVector3Array(-0.1, -0.1, -0.336842, 0.1, 0.1, 0.336842, 0.1, -0.1, 0.336842, 0.1, 0.1, -0.336842, -0.1, 0.1, 0.336842, -0.1, -0.1, 0.336842, 0.1, -0.1, -0.336842, -0.1, 0.1, -0.336842)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5p7af"]
+size = Vector3(0.2, 0.2, 0.7)
+
+[node name="Enemy" type="RigidBody3D"]
+collision_layer = 3
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_dax3d")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ea66o")
+
+[node name="Body" type="MeshInstance3D" parent="Hitbox"]
+mesh = SubResource("CapsuleMesh_madbl")
+skeleton = NodePath("../..")
+
+[node name="Weapon" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.16122)
+collision_layer = 0
+collision_mask = 4
+
+[node name="Hurtbox" type="CollisionShape3D" parent="Weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.768304, 0.505046)
+shape = SubResource("ConvexPolygonShape3D_sdm75")
+
+[node name="Skin" type="MeshInstance3D" parent="Weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.768304, 0.505046)
+mesh = SubResource("BoxMesh_5p7af")
+skeleton = NodePath("../..")
+
+[node name="iFrames" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="Weapon" to="." method="_on_weapon_body_entered"]
+[connection signal="timeout" from="iFrames" to="." method="_on_timer_timeout"]
